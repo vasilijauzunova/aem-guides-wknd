@@ -1,12 +1,16 @@
 package com.adobe.aem.guides.wknd.core.models;
 
+import com.adobe.aem.guides.wknd.core.models.impl.YuriiPhoneNumberLookupImpl;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
 @Model(adaptables = {Resource.class}, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class YuriiContactModel  {
+    @OSGiService
+    private YuriiPhoneNumberLookup lookup;
     @ValueMapValue
     private String title;
     @ValueMapValue
@@ -35,7 +39,7 @@ public class YuriiContactModel  {
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return lookup.findCountry(phoneNumber);
     }
 
     public void setPhoneNumber(String phoneNumber) {
