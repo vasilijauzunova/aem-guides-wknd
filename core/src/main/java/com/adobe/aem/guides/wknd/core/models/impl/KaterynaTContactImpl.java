@@ -2,10 +2,12 @@ package com.adobe.aem.guides.wknd.core.models.impl;
 
 
 import com.adobe.aem.guides.wknd.core.models.KaterynaTContact;
+import com.adobe.aem.guides.wknd.core.models.KaterynaTCountryLookupService;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
 import javax.security.auth.login.CredentialException;
@@ -31,6 +33,8 @@ public class KaterynaTContactImpl implements KaterynaTContact {
     @ValueMapValue
     private String phoneNumber;
 
+    @OSGiService
+    private KaterynaTCountryLookupService countryLookupService;
 
     @Override
     public String getTitle() {
@@ -59,15 +63,19 @@ public class KaterynaTContactImpl implements KaterynaTContact {
 
     @Override
     public String getData() throws CredentialException {
-        if (getPhoneNumber().isEmpty() && getFirstName().isEmpty() && getLastName().isEmpty()) {
-            throw new CredentialException();
-        } else {
-            return "The title is: " + title +
-                    "<br/> The First Name is: " + firstName +
-                    "<br/> The Last Name is: " + lastName +
-                    "<br/> The Phonenumber is: " + phoneNumber +
-                    "<br/> The email is: " + emailAddress;
+        if ((phoneNumber == null || phoneNumber.isEmpty()) &&
+                (firstName == null || firstName.isEmpty()) &&
+                (lastName == null || lastName.isEmpty())) {
+            throw new CredentialException("Missing required contact information.");
         }
+
+        String country = countryLookupService != null ? countryLookupService.getCountryLabel(phoneNumber) : "Unknown";
+
+        return "The title is: " + title +
+                "<br/> The First Name is: " + firstName +
+                "<br/> The Last Name is: " + lastName +
+                "<br/> The Phonenumber is: " + phoneNumber + " (" + country + ")" +
+                "<br/> The email is: " + emailAddress;
     }
 }
 
