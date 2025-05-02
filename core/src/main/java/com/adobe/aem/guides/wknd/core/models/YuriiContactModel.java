@@ -1,14 +1,27 @@
 package com.adobe.aem.guides.wknd.core.models;
 
-import com.adobe.aem.guides.wknd.core.models.impl.YuriiPhoneNumberLookupImpl;
+import com.day.cq.wcm.api.Page;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.caconfig.ConfigurationBuilder;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
+import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
+import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
-@Model(adaptables = {Resource.class}, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+import javax.inject.Inject;
+
+@Model(adaptables = {Resource.class, SlingHttpServletRequest.class }, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class YuriiContactModel  {
+    @SlingObject
+    ResourceResolver resourceResolver;
+
+    @Inject
+    Page currentPage;
     @OSGiService
     private YuriiPhoneNumberLookup lookup;
     @ValueMapValue
@@ -39,8 +52,9 @@ public class YuriiContactModel  {
     }
 
     public String getPhoneNumber() {
-        return lookup.findCountry(phoneNumber);
+        return getConfig(currentPage.getPath(), resourceResolver).isCountryEnabled() ? lookup.findCountry(phoneNumber) : "";
     }
+
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
@@ -60,5 +74,17 @@ public class YuriiContactModel  {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public YTContactConfig getConfig(String currentPage, ResourceResolver resourceResolver){
+        String currentPath  = StringUtils.isNotBlank(currentPage) ? currentPage: StringUtils.EMPTY;
+        Resource contentResource = resourceResolver.getResource(currentPath);
+        if(contentResource != null){
+            ConfigurationBuilder  configurationBuilder = contentResource.adaptTo(ConfigurationBuilder.class);
+            if(configurationBuilder != null){
+                return configurationBuilder.as(YTContactConfig.class);
+            }
+        }
+        return null;
     }
 }
