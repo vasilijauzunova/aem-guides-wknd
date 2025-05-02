@@ -3,13 +3,17 @@ package com.adobe.aem.guides.wknd.core.models.impl;
 
 import com.adobe.aem.guides.wknd.core.models.KaterynaTContact;
 import com.adobe.aem.guides.wknd.core.models.KaterynaTCountryLookupService;
+import com.adobe.aem.guides.wknd.core.models.KaterynaTFeatureToggleService;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import javax.security.auth.login.CredentialException;
 
 @Model(adaptables = {SlingHttpServletRequest.class, Resource.class},
@@ -19,7 +23,6 @@ import javax.security.auth.login.CredentialException;
 public class KaterynaTContactImpl implements KaterynaTContact {
 
     protected static final String RESOURCE_TYPE = "wknd/components/kateryna-tkachova-contact";
-
     @ValueMapValue
     private String title;
     @ValueMapValue
@@ -35,6 +38,12 @@ public class KaterynaTContactImpl implements KaterynaTContact {
 
     @OSGiService
     private KaterynaTCountryLookupService countryLookupService;
+    @OSGiService
+    private KaterynaTFeatureToggleService featureToggleService;
+    @Inject
+    private SlingHttpServletRequest request;
+
+    private ResourceResolver resourceResolver;
 
     @Override
     public String getTitle() {
@@ -61,6 +70,12 @@ public class KaterynaTContactImpl implements KaterynaTContact {
         return emailAddress;
     }
 
+    @PostConstruct
+    private void init() {
+        if (request != null) {
+            resourceResolver = request.getResourceResolver();
+        }
+    }
     @Override
     public String getData() throws CredentialException {
         if ((phoneNumber == null || phoneNumber.isEmpty()) &&
@@ -69,13 +84,21 @@ public class KaterynaTContactImpl implements KaterynaTContact {
             throw new CredentialException("Missing required contact information.");
         }
 
-        String country = countryLookupService != null ? countryLookupService.getCountryLabel(phoneNumber) : "Unknown";
+        String country = (featureToggleService.isFeatureToggleEnabled(resourceResolver) && countryLookupService != null)
+                ? countryLookupService.getCountryLabel(phoneNumber) : "";
 
-        return "The title is: " + title +
-                "<br/> The First Name is: " + firstName +
-                "<br/> The Last Name is: " + lastName +
-                "<br/> The Phonenumber is: " + phoneNumber + " (" + country + ")" +
-                "<br/> The email is: " + emailAddress;
+        StringBuilder result = new StringBuilder();
+        result.append("The title is: ").append(title)
+                .append("<br/> The First Name is: ").append(firstName)
+                .append("<br/> The Last Name is: ").append(lastName)
+                .append("<br/> The Phonenumber is: ").append(phoneNumber);
+
+        if (!country.isEmpty()) {
+            result.append(" (").append(country).append(")");
+        }
+
+        result.append("<br/> The email is: ").append(emailAddress);
+        return result.toString();
     }
 }
 
