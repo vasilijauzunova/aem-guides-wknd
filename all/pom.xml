@@ -90,6 +90,12 @@
                             <type>zip</type>
                             <target>/apps/wknd-vendor-packages/content/install</target>
                         </embedded>
+                        <embedded>
+                            <groupId>com.googlecode.libphonenumber</groupId>
+                            <artifactId>libphonenumber</artifactId>
+                            <type>jar</type>
+                            <target>/apps/wknd-vendor-packages/content/install</target>
+                        </embedded>
                     </embeddeds>
                 </configuration>
             </plugin>
@@ -266,6 +272,11 @@
     <!-- D E P E N D E N C I E S                                                -->
     <!-- ====================================================================== -->
     <dependencies>
+        <dependency>
+            <groupId>com.googlecode.libphonenumber</groupId>
+            <artifactId>libphonenumber</artifactId>
+            <version>9.0.4</version>
+        </dependency>
         <dependency>
             <groupId>com.adobe.aem.guides</groupId>
             <artifactId>aem-guides-wknd.ui.apps</artifactId>
