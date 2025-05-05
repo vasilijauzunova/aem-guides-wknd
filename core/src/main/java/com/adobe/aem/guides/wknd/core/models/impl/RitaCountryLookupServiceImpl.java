@@ -10,12 +10,13 @@ import java.util.Locale;
 
 @Component(service = RitaCountryLookupService.class )
 public class RitaCountryLookupServiceImpl implements RitaCountryLookupService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(LinditCountryLookupServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RitaCountryLookupService.class);
 
     private final PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
 
     @Override
     public String getCountry(String phoneNumber) {
+        LOGGER.info("Looking for country for phone number: " + phoneNumber);
         try {
             Phonenumber.PhoneNumber numberProto = phoneUtil.parse(phoneNumber, "");
             String regionCode = phoneUtil.getRegionCodeForNumber(numberProto);
