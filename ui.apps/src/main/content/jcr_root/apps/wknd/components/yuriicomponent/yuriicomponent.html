@@ -1,10 +1,17 @@
 <sly data-sly-use.model="com.adobe.aem.guides.wknd.core.models.YuriiContactModel">
-    <div>
+    <div class="yt-component">
+        <div id="pokemon-container">
+            <img id="pokemon-sprite" alt="Pokémon Sprite" />
+        </div>
         <span>${model.title}</span><br/>
         <span>${model.firstName}</span> <br/>
         <span>${model.lastName}</span> <br/>
-        <span>${model.phoneNumber}</span> <br/>
-        <span>${model.email}</span> <br/>
+        <span class="highlighted-components">${model.phoneNumber}</span> <br/>
+        <span class="highlighted-components">${model.email}</span> <br/>
     </div>
-</sly>
+    <button id="myButton">
+        <i class="fa fa-thumbs-up"></i>
+        Click Me
+    </button>
 
+</sly>
