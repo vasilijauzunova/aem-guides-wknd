@@ -71,6 +71,10 @@
                                 jcr:primaryType="nt:unstructured" 
                                 sling:resourceType="wcm/core/components/policies/mapping"
                                 cq:policy="wknd/components/custom/ignite/policy_1666948154243"/>
+                            <ytcomponent
+                                    cq:policy="wknd/components/ytcomponent/policy_34642779885909"
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="wcm/core/components/policies/mapping"/>
                         </custom>
                     </components>
                 </wknd>
