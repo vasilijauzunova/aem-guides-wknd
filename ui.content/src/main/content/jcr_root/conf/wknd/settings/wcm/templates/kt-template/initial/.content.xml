@@ -4,7 +4,7 @@
     <jcr:content
             cq:lastModified="{Date}2020-07-12T16:13:25.676-07:00"
             cq:lastModifiedBy="admin"
-            cq:template="/conf/wknd/settings/wcm/templates/article-page-KT-template"
+            cq:template="/conf/wknd/settings/wcm/templates/kt-template"
             jcr:primaryType="cq:PageContent"
             sling:resourceType="wknd/components/page">
         <root
