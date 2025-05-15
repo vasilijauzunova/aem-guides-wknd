@@ -4,6 +4,7 @@ package com.adobe.aem.guides.wknd.core.models.impl;
 import com.adobe.aem.guides.wknd.core.models.KaterynaTContact;
 import com.adobe.aem.guides.wknd.core.models.KaterynaTCountryLookupService;
 import com.adobe.aem.guides.wknd.core.models.KaterynaTFeatureToggleService;
+import com.day.cq.wcm.api.Page;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
@@ -23,6 +24,8 @@ import javax.security.auth.login.CredentialException;
 public class KaterynaTContactImpl implements KaterynaTContact {
 
     protected static final String RESOURCE_TYPE = "wknd/components/kateryna-tkachova-contact";
+    @Inject
+    private Page currentPage;
     @ValueMapValue
     private String title;
     @ValueMapValue
@@ -84,7 +87,7 @@ public class KaterynaTContactImpl implements KaterynaTContact {
             throw new CredentialException("Missing required contact information.");
         }
 
-        String country = (featureToggleService.isFeatureToggleEnabled(resourceResolver) && countryLookupService != null)
+        String country = (featureToggleService.isFeatureToggleEnabled(currentPage.getPath(), resourceResolver) && countryLookupService != null)
                 ? countryLookupService.getCountryLabel(phoneNumber) : "";
 
         StringBuilder result = new StringBuilder();
