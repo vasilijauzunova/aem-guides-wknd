@@ -1,0 +1,4 @@
+<sly data-sly-use.placeholderTemplate="core/wcm/components/commons/v1/templates.html"
+     data-sly-use.model="com.adobe.aem.guides.wknd.core.models.KaterynaTContact"></sly>
+<p>${model.data @ context = 'html'}</p>
+<sly data-sly-call="${placeholderTemplate.placeholder @ isEmpty=!hasContent}"></sly>

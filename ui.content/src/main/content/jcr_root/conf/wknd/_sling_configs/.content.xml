@@ -9,4 +9,8 @@
         jcr:primaryType="nt:unstructured"
         clientId="28b07c6be4d544f188dc2f36e33b196b"
         reportSuiteId=""/>
+    <com.adobe.aem.guides.wknd.core.models.CountryFeatureToggle
+            jcr:primaryType="nt:unstructured"
+            enabled="{Boolean}true"
+    />
 </jcr:root>
