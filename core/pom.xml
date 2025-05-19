@@ -134,6 +134,18 @@ Import-Package: javax.annotation;version=0.0.0,*
             <version>1.4.4</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.libphonenumber</groupId>
+            <artifactId>libphonenumber</artifactId>
+            <version>9.0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-imaging</artifactId>
+            <version>1.0-alpha3</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
       <!-- Additional Profiles for Cloud Service vs. 6.x -->
