@@ -1,0 +1,21 @@
+<sly data-sly-use.model="com.adobe.aem.guides.wknd.core.models.YuriiContactModel">
+    <div class="${['cmp-customgridcomponent', grid.cssClass] @ join=' '}">
+        <div id="${model.idAttr}"
+             data-cmp-data-layer="${model.data.json}"
+             data-cmp-is="yurii-contact">data layer</div>
+        <div class="cmp-ytcomponent--main">
+            <div id="pokemon-container">
+                <img id="pokemon-sprite" alt="Pokémon Sprite"/>
+            </div>
+            <span>${model.title}</span><br/>
+            <span>${model.firstName}</span> <br/>
+            <span>${model.lastName}</span> <br/>
+            <span class="highlighted-components">${model.phoneNumber}</span> <br/>
+            <span class="highlighted-components">${model.email}</span> <br/>
+        </div>
+        <button id="myButton">
+            <i class="fa fa-thumbs-up"></i>
+            Click Me
+        </button>
+    </div>
+</sly>

@@ -40,7 +40,7 @@
         <module>ui.apps.structure</module>
         <module>ui.config</module>
         <module>ui.content</module>
-        <module>ui.content.sample</module>
+<!--        <module>ui.content.sample</module>-->
         <module>it.tests</module>
         <module>ui.tests</module>
     </modules>
@@ -494,16 +494,8 @@ Bundle-DocURL:
 
         <!-- Development profile: install only the bundle -->
         <profile>
-            <id>autoInstallBundle</id>
-            <!--
-                To enable this feature for a bundle, the sling-maven-plugin
-                (without configuration) needs to be included:
-
-                <plugin>
-                    <groupId>org.apache.sling</groupId>
-                    <artifactId>sling-maven-plugin</artifactId>
-                 </plugin>
-            -->
+            <id>autoInstallBundle
+            </id>                                                <!--                To enable this feature for a bundle, the sling-maven-plugin                (without configuration) needs to be included:                <plugin>                    <groupId>org.apache.sling</groupId>                    <artifactId>sling-maven-plugin</artifactId>                 </plugin>            -->
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -742,6 +734,12 @@ Bundle-DocURL:
                 <artifactId>core.wcm.components.config</artifactId>
                 <type>zip</type>
                 <version>${core.wcm.components.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.wcm.maven</groupId>
+                <artifactId>io.wcm.maven.aem-dependencies</artifactId>
+                <version>6.5.19.0000</version>
+                <type>pom</type>
             </dependency>
 
             <!-- WKND Shared -->

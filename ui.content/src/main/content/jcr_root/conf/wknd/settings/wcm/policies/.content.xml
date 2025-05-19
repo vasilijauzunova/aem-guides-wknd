@@ -1137,6 +1137,32 @@
                         </cq:styleGroups>
                     </policy_1666948154243>
                 </ignite>
+                <ytcomponent jcr:primaryType="nt:unstructured">
+                    <policy_34642779885909
+                            jcr:lastModified="{Date}2025-05-05T09:21:28.911Z"
+                            jcr:lastModifiedBy="admin"
+                            jcr:primaryType="nt:unstructured"
+                            jcr:title="YT Component Policy"
+                            sling:resourceType="wcm/core/components/policy/policy">
+                        <jcr:content jcr:primaryType="nt:unstructured"/>
+                        <cq:styleGroups jcr:primaryType="nt:unstructured">
+                            <item0
+                                    cq:styleGroupLabel="Color"
+                                    jcr:primaryType="nt:unstructured">
+                                <cq:styles jcr:primaryType="nt:unstructured">
+                                    <item0
+                                            cq:styleClasses="cmp-contact__dark"
+                                            cq:styleLabel="Dark"
+                                            jcr:primaryType="nt:unstructured"/>
+                                    <item1
+                                            cq:styleClasses="cmp-contact__light"
+                                            cq:styleLabel="Yellow"
+                                            jcr:primaryType="nt:unstructured"/>
+                                </cq:styles>
+                            </item0>
+                        </cq:styleGroups>
+                    </policy_34642779885909>
+                </ytcomponent>
             </custom>
         </components>
     </wknd>
