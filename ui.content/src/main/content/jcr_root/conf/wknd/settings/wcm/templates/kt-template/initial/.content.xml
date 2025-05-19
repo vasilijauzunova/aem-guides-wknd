@@ -50,7 +50,7 @@
                             jcr:lastModifiedBy="admin"
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="wknd/components/image"
-                            fileReference="/content/dam/wknd/kate-img.jpg"
+                            fileReference="/content/dam/wknd/en/site/not-found.jpg"
                             alt="Default image placeholder"
                             editable="{Boolean}true"/>
                     <text
