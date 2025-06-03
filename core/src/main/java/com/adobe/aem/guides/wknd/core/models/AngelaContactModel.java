@@ -28,7 +28,6 @@ public class AngelaContactModel {
     @ValueMapValue
     protected String email;
 
-    @ValueMapValue
     protected String country;
 
     @OSGiService(injectionStrategy = InjectionStrategy.REQUIRED)
@@ -38,7 +37,7 @@ public class AngelaContactModel {
     private AngelaToggleService toggleService;
 
     @SlingObject
-    private ResourceResolver resource;
+    private ResourceResolver resourceResolver;
 
     public String getTitle() {
         return title;
@@ -61,7 +60,7 @@ public class AngelaContactModel {
     }
 
     public String getCountry() {
-        if (toggleService.isCountryEnabled(resource) && country == null)
+        if (toggleService.isCountryEnabled(resourceResolver) && country == null)
             country = countryLookupService.getCountry(this.phoneNumber);
         return country;
     }
