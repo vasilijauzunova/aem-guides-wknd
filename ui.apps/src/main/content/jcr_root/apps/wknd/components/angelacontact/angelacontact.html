@@ -1,0 +1,6 @@
+<sly data-sly-use.contact="com.adobe.aem.guides.wknd.core.models.AngelaContactModel"/>
+<h1 data-sly-test="${contact.title}">${contact.title}</h1>
+<p>First name: ${contact.firstName}</p>
+<p>Last name: ${contact.lastName}</p>
+<p>Phone number: ${contact.phoneNumber} <span data-sly-test="${contact.country}">(${contact.country})</span></p>
+<p data-sly-test="${contact.email}">Email: ${contact.email}</p>
