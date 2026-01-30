@@ -1,7 +1,11 @@
 <sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"/>
-<h1>${properties.title}</h1>
-<h3>First name: ${properties.firstName}</h3>
-<h3>Last name: ${properties.lastName}</h3>
-<h3>Phone number: ${properties.phoneNum}</h3>
-<h3>Email: ${properties.email}</h3>
+<div data-sly-use.model="com.adobe.aem.guides.wknd.core.models.NatalijaContact">
+    <h1>${model.title}</h1>
+    <div class="cmp-natalijacontact__properties">
+        <h3>First name: ${model.firstName}</h3>
+        <h3>Last name: ${model.lastName}</h3>
+        <h3>Phone number: ${model.phoneNum}</h3>
+        <h3>Email: ${model.email}</h3>
+    </div>
+</div>
 <sly data-sly-call="${templates.placeholder @ isEmpty=!hasContent}"></sly>
