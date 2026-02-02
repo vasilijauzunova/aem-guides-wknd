@@ -38,7 +38,7 @@
                     sling:resourceType="granite/ui/components/foundation/form/textfield"
                     fieldLabel="Phone number"
                     fieldDescription="Enter phone number"
-                    name="./phoneNum"/>
+                    name="./phoneNumber"/>
           <email jcr:primaryType="nt:unstructured"
                      sling:resourceType="granite/ui/components/foundation/form/textfield"
                      fieldLabel="Email"
