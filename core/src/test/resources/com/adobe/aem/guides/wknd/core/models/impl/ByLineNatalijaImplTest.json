@@ -1,0 +1,22 @@
+{
+  "bylineNatalija": {
+    "jcr:primaryType": "nt:unstructured",
+    "sling:resourceType": "wknd/components/content/bylineNatalija",
+    "name": "Jane Doe",
+    "occupations": ["Photographer", "Blogger", "YouTuber"]
+  },
+  "empty": {
+    "jcr:primaryType": "nt:unstructured",
+    "sling:resourceType": "wknd/components/content/bylineNatalija"
+  },
+  "without-name": {
+    "jcr:primaryType": "nt:unstructured",
+    "sling:resourceType": "wknd/components/content/bylineNatalija",
+    "occupations": ["Photographer", "Blogger", "YouTuber"]
+  },
+  "without-occupations": {
+    "sling:resourceType": "wknd/components/content/bylineNatalija",
+    "jcr:primaryType": "nt:unstructured",
+    "name": "Jane Doe"
+  }
+}
