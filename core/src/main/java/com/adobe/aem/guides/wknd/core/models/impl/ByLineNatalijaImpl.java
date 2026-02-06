@@ -72,9 +72,6 @@ public class ByLineNatalijaImpl implements BylineNatalija {
             return true;
         } else if (occupations == null || occupations.isEmpty()){
             return true;
-        } else if (image == null || StringUtils.isBlank(image.getSrc())){
-            return true;
-        }
-        else return false;
+        } else return image == null || StringUtils.isBlank(image.getSrc());
     }
 }
