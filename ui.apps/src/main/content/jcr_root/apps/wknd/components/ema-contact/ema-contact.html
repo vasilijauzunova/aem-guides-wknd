@@ -1,0 +1,18 @@
+<sly data-sly-use.model="com.adobe.aem.guides.wknd.core.models.EmaContact"/>
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"/>
+
+<h3>
+    ${model.fullName}
+</h3>
+<p data-sly-test="${model.phoneNumber}">
+    Phone:
+    <a href="tel:${model.phoneNumber}">
+        ${model.phoneNumber}
+    </a>
+</p>
+<p data-sly-test="${model.emailAddress && model.validEmail}">
+    Email:
+    <a href="mailto:${model.emailAddress @ context='uri'}">
+        ${model.emailAddress}
+    </a>
+</p>
