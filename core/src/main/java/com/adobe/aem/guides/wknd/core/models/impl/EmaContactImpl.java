@@ -1,6 +1,7 @@
 package com.adobe.aem.guides.wknd.core.models.impl;
 
 import com.adobe.aem.guides.wknd.core.models.EmaContact;
+import com.adobe.aem.guides.wknd.core.services.EmaCountryLookupService;
 import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
 import org.apache.commons.lang3.StringUtils;
@@ -8,6 +9,7 @@ import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
 @Model(adaptables = {SlingHttpServletRequest.class, Resource.class},
@@ -30,6 +32,10 @@ public class EmaContactImpl implements EmaContact {
 	private String emailAddress;
 	@ValueMapValue
 	private String phoneNumber;
+	@ValueMapValue
+	private String country;
+	@OSGiService
+	private EmaCountryLookupService countryLookupService;
 
 	private boolean isEmailValid;
 
@@ -76,6 +82,14 @@ public class EmaContactImpl implements EmaContact {
 	@Override
 	public String getEmailAddress() {
 		return StringUtils.defaultString(emailAddress).trim();
+	}
+
+	@Override
+	public String getCountry() {
+		if (countryLookupService != null && StringUtils.isNotBlank(phoneNumber)) {
+			return countryLookupService.getCountryByPhoneNumber(phoneNumber);
+		}
+		return "";
 	}
 
 	@Override

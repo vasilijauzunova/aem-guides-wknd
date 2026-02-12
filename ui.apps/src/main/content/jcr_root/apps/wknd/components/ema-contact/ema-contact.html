@@ -9,6 +9,9 @@
     <a href="tel:${model.phoneNumber}">
         ${model.phoneNumber}
     </a>
+    <sly data-sly-test="${model.country}">
+        (${model.country})
+    </sly>
 </p>
 <p data-sly-test="${model.emailAddress && model.validEmail}">
     Email:

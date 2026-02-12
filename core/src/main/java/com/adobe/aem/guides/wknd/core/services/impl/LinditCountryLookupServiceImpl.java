@@ -1,6 +1,6 @@
-package com.adobe.aem.guides.wknd.core.models.impl;
+package com.adobe.aem.guides.wknd.core.services.impl;
 
-import com.adobe.aem.guides.wknd.core.models.LinditCountryLookupService;
+import com.adobe.aem.guides.wknd.core.services.LinditCountryLookupService;
 import org.apache.commons.lang3.tuple.Pair;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;

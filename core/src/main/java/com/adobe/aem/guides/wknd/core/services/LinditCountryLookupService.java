@@ -1,4 +1,4 @@
-package com.adobe.aem.guides.wknd.core.models;
+package com.adobe.aem.guides.wknd.core.services;
 
 
 public interface LinditCountryLookupService {
