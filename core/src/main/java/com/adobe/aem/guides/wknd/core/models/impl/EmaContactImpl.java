@@ -1,5 +1,6 @@
 package com.adobe.aem.guides.wknd.core.models.impl;
 
+import com.adobe.aem.guides.wknd.core.caconfig.EmaContactConfif;
 import com.adobe.aem.guides.wknd.core.models.EmaContact;
 import com.adobe.aem.guides.wknd.core.services.EmaCountryLookupService;
 import java.util.regex.Pattern;
@@ -7,9 +8,11 @@ import javax.annotation.PostConstruct;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.caconfig.ConfigurationBuilder;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
+import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
 @Model(adaptables = {SlingHttpServletRequest.class, Resource.class},
@@ -36,6 +39,9 @@ public class EmaContactImpl implements EmaContact {
 	private String country;
 	@OSGiService
 	private EmaCountryLookupService countryLookupService;
+	@SlingObject
+	private Resource resource;
+	private EmaContactConfif config;
 
 	private boolean isEmailValid;
 
@@ -43,6 +49,12 @@ public class EmaContactImpl implements EmaContact {
 	protected void init() {
 		isEmailValid = StringUtils.isNotBlank(emailAddress) &&
 		               EMAIL_PATTERN.matcher(emailAddress.trim()).matches();
+		if (resource != null) {
+			ConfigurationBuilder configBuilder = resource.adaptTo(ConfigurationBuilder.class);
+			if (configBuilder != null) {
+				config = configBuilder.as(EmaContactConfif.class);
+			}
+		}
 	}
 
 	@Override
@@ -95,6 +107,11 @@ public class EmaContactImpl implements EmaContact {
 	@Override
 	public boolean isValidEmail() {
 		return isEmailValid;
+	}
+
+	@Override
+	public boolean isShowCountry() {
+		return config != null && config.showCountry();
 	}
 }
 

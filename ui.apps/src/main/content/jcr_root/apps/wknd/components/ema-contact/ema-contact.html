@@ -9,7 +9,7 @@
     <a href="tel:${model.phoneNumber}">
         ${model.phoneNumber}
     </a>
-    <sly data-sly-test="${model.country}">
+    <sly data-sly-test="${model.showCountry && model.country}">
         (${model.country})
     </sly>
 </p>
