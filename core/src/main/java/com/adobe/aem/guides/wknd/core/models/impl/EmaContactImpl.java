@@ -1,6 +1,6 @@
 package com.adobe.aem.guides.wknd.core.models.impl;
 
-import com.adobe.aem.guides.wknd.core.caconfig.EmaContactConfif;
+import com.adobe.aem.guides.wknd.core.caconfig.EmaContactConfig;
 import com.adobe.aem.guides.wknd.core.models.EmaContact;
 import com.adobe.aem.guides.wknd.core.services.EmaCountryLookupService;
 import java.util.regex.Pattern;
@@ -41,7 +41,7 @@ public class EmaContactImpl implements EmaContact {
 	private EmaCountryLookupService countryLookupService;
 	@SlingObject
 	private Resource resource;
-	private EmaContactConfif config;
+	private EmaContactConfig config;
 
 	private boolean isEmailValid;
 
@@ -52,7 +52,7 @@ public class EmaContactImpl implements EmaContact {
 		if (resource != null) {
 			ConfigurationBuilder configBuilder = resource.adaptTo(ConfigurationBuilder.class);
 			if (configBuilder != null) {
-				config = configBuilder.as(EmaContactConfif.class);
+				config = configBuilder.as(EmaContactConfig.class);
 			}
 		}
 	}
